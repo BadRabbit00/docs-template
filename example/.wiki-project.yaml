@@ -1,0 +1,9 @@
+version: 1
+project: orders-example
+wiki:
+  url: http://127.0.0.1:8787
+  profile: go-service
+  scopes: []
+policy_blocks: []
+docs:
+  root: docs
