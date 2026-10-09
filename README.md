@@ -1,4 +1,4 @@
-# docs-kit — справочная документация проекта как источник правды
+# docs-template — справочная документация проекта как источник правды
 
 Что внутри:
 
@@ -18,7 +18,7 @@
 Быстрый старт:
 
 ```
-cp -r docs-kit/docs ./docs
+cp -r docs-template/docs ./docs
 cp -r docs/components/_template docs/components/<имя-компонента>
 wk docs check
 ```
