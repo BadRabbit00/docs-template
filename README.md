@@ -12,16 +12,30 @@
 | `wk docs check` | встроенная проверка документации + генерация `_meta/registry.md`; Python в проекте не нужен |
 | `docs/components/_template/` | шаблон папки компонента — копируй как `components/<имя>/` |
 | `docs/decisions/ADR-0000-template.md` | шаблон архитектурного решения |
-| `example/` | заполненный пример: 2 сервиса (Go + Python), БД, события, модель, код с маркерами |
+| `example/` | заполненный пример: 2 сервиса (Go + Python), БД, события, модель, код с маркерами. **Только для чтения, в проект не копируется** |
 | `AGENTS-snippet.md` | блок для `AGENTS.md` / `CLAUDE.md` / инструкций агента |
 
-Быстрый старт:
+Быстрый старт — через `wk`, который несёт тот же скелет `docs/` встроенным
+(побайтово, без `example/`):
 
 ```
-cp -r docs-template/docs ./docs
-cp -r docs/components/_template docs/components/<имя-компонента>
+wk init --dir ./my-project --profile <профиль> --url <вика>
+wk component add <имя-компонента>
 wk docs check
 ```
+
+Проект с уже написанной документацией (в том числе скопированной отсюда вручную):
+
+```
+wk init --keep --profile <профиль> --url <вика>   # существующие docs/, AGENTS.md, flake.nix не меняются
+wk docs upgrade                                   # удаляет старый docs/_meta/check.py
+wk policy sync                                    # добавляет блок политик в AGENTS.md
+```
+
+Без `--keep` init с существующими файлами останавливается до записи, а `--force`
+перезаписывает их скелетом. Если копируешь руками — бери только `docs/`;
+`example/` в корне проекта даёт десятки ошибок `wk docs check`: его маркеры
+`doc:` ссылаются на ID, которых нет в твоих `docs/`.
 
 Посмотреть, как выглядит готовое: `example/docs/INDEX.md`, затем `example/docs/_meta/registry.md`
 (из каталога `example/` запусти `wk docs check`).
